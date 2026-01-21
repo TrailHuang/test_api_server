@@ -7,11 +7,16 @@
     "start": "node server.js",
     "dev": "node server.js"
   },
-  "keywords": ["express", "api", "rest"],
+  "keywords": [
+    "express",
+    "api",
+    "rest"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "multer": "^2.0.2"
   },
   "engines": {
     "node": ">=14.0.0"
