@@ -14,7 +14,7 @@ fi
 # 服务配置
 SERVICE_NAME="test-api-server"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
-APP_DIR="/mnt/d/BaiduSyncdisk/my_code/nodejs/test_api_server"
+APP_DIR="$(pwd)"
 USER_NAME="$SUDO_USER"
 
 # 检查应用目录是否存在

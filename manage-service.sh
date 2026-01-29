@@ -21,7 +21,7 @@ show_help() {
 
 # 检查权限
 check_root() {
-    if [ "$EUID" -ne 0 ]; then 
+    if [ "$EUID" -ne 0 ]; then
         echo "错误: 此操作需要root权限，请使用sudo"
         exit 1
     fi
@@ -38,9 +38,12 @@ check_service() {
 # 安装服务
 install_service() {
     check_root
-    
+
     echo "正在安装 $SERVICE_NAME 服务..."
-    
+
+    # 获取当前目录
+    APP_DIR="$(pwd)"
+
     # 创建服务文件
     cat > "/etc/systemd/system/${SERVICE_NAME}.service" << EOF
 [Unit]
@@ -52,7 +55,7 @@ Wants=network.target
 Type=simple
 User=$SUDO_USER
 Group=$SUDO_USER
-WorkingDirectory=/mnt/d/BaiduSyncdisk/my_code/nodejs/test_api_server
+WorkingDirectory=$APP_DIR
 ExecStart=$(which npm) start
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=on-failure
@@ -80,7 +83,7 @@ EOF
 
     systemctl daemon-reload
     systemctl enable $SERVICE_NAME
-    
+
     echo "✓ 服务安装完成"
     echo "运行 'sudo $0 start' 启动服务"
 }
@@ -88,15 +91,15 @@ EOF
 # 卸载服务
 uninstall_service() {
     check_root
-    
+
     echo "正在卸载 $SERVICE_NAME 服务..."
-    
+
     systemctl stop $SERVICE_NAME 2>/dev/null || true
     systemctl disable $SERVICE_NAME 2>/dev/null || true
     rm -f "/etc/systemd/system/${SERVICE_NAME}.service"
     systemctl daemon-reload
     systemctl reset-failed
-    
+
     echo "✓ 服务卸载完成"
 }
 
