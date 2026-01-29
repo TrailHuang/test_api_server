@@ -140,7 +140,7 @@ app.get('/files/:filename', (req, res) => {
     }
 });
 
-app.post('/upload', upload.any(), (req, res) => {
+app.post('/files', upload.any(), (req, res) => {
     try {
         if (!req.files || req.files.length === 0) {
             return res.status(400).json({
@@ -322,7 +322,7 @@ app.listen(PORT, () => {
     console.log('  GET  /          - 服务器信息');
     console.log('  GET  /files     - 获取文件列表');
     console.log('  GET  /files/:filename - 获取指定文件内容');
-    console.log('  POST /upload    - 上传JSON文件');
+    console.log('  POST /files    - 上传JSON文件');
     console.log('  DELETE /files/:filename - 删除文件');
 });
 
