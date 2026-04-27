@@ -56,12 +56,12 @@ app.get('/', (req, res) => {
         endpoints: {
             'GET /files': '获取所有上传的文件列表',
             'GET /files/:filename': '获取指定文件的内容',
-            'POST /upload': '上传JSON文件',
+            'POST /files': '上传样本文件',
             'DELETE /files/:filename': '删除指定文件'
         },
         usage: {
-            '其他路由': '通过X-FILENAME头指定文件名，返回对应文件内容',
-            '示例': 'curl -H "X-FILENAME: example.json" http://localhost:3000/any/path'
+            '其他路由': '通过X-FILENAME头指定文件名，返回对应文件内容。 url可以是任意路径，只需要在X-FILENAME头中指定文件名即可。',
+            '示例': 'curl -H "X-FILENAME: example.json" http://localhost:3000/api/getInfo'
         }
     });
 });
@@ -322,7 +322,7 @@ app.listen(PORT, () => {
     console.log('  GET  /          - 服务器信息');
     console.log('  GET  /files     - 获取文件列表');
     console.log('  GET  /files/:filename - 获取指定文件内容');
-    console.log('  POST /files    - 上传JSON文件');
+    console.log('  POST /files    - 上传样本文件');
     console.log('  DELETE /files/:filename - 删除文件');
 });
 
